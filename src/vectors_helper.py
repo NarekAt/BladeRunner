@@ -19,8 +19,10 @@ class InputError(BladeError):
 
 
 def transformer(vectorStr):
-	vectorStr = vectorStr[1:-1]
+	if isinstance(vectorStr, list):
+		return vectorStr
 
+	vectorStr = vectorStr[1:-1]
 	vector = map(int, vectorStr.split(','))
 	return vector
 
@@ -35,6 +37,7 @@ def BladeAdd(vector1Str, vector2Str):
 
 def BladeSMult(vectorStr, number):
 	vector = transformer(vectorStr)
+
 	for i in range(0, len(vector)):
 		vector[i] *= number
 

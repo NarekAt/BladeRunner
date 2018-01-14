@@ -13,6 +13,7 @@ vectors_grammar = """
                | "add" variable "," variable    -> add_
                | "mult" variable "," variable   -> mult_
                | "smult" variable "," NUMBER    -> smult_
+               | "dotpr" variable "," variable  -> dotpr_
                | "repeat" NUMBER code_block     -> repeat_
                | "print" variable               -> print_
 
@@ -43,11 +44,8 @@ class VectorGrammarTree(InlineTransformer):
         return value
 
     def print_(self, variable):
-      if variable in self.vars:
-        print(self.vars[variable])
-      else:
-        print('ERROR at line %d : Undeclared variable passed as print argument' % self._lineNumber)
-      self._lineNumber += 1
+        print self.var(variable)
+        self._lineNumber += 1
 
     def add_(self, var1, var2):
         vector1 = self.var(var1)
@@ -62,6 +60,11 @@ class VectorGrammarTree(InlineTransformer):
     def smult_(self, var, number):
         vector = self.var(var)
         return BladeSMult(vector, int(number))
+
+    def dotpr_(self, var1, var2):
+        vector1 = self.var(var1)
+        vector2 = self.var(var2)
+        return BladeDotProduct(vector1, vector2)
 
     def repeat_(self, number, code_block):
       # TODO: Not implemented
@@ -85,3 +88,10 @@ def eval(programm):
         if (e.expression != None):
             print e.expression
     sys.exit()
+
+
+if __name__ == '__main__':
+    if len(sys.argv) == 2:
+        with open(sys.argv[1], 'r') as inputFile:
+            data = inputFile.read()
+            eval(data)

@@ -1,0 +1,4 @@
+let vecA = {12,2}
+let vecB = {3,6}
+let Sum = add vecN,vecB
+print Sum

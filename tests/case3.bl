@@ -1,0 +1,6 @@
+let vecA = {12,2}
+let vecB = {3,6}
+let Product = dotpr vecA, vecB
+print Product
+let Sm = smult vecB, 5
+print Sm

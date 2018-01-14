@@ -1,0 +1,10 @@
+
+let vecA = {6,10}
+
+let vecB = {3,8}
+
+let M = mult vecA, vecB
+print M
+
+let res = smult M, 3
+print res

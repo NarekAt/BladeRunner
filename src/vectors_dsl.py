@@ -13,6 +13,7 @@ vectors_grammar = """
                | "add" variable "," variable    -> add_
                | "mult" variable "," variable   -> mult_
                | "smult" variable "," NUMBER    -> smult_
+               | "smult" variable "," variable  -> smult_
                | "dotpr" variable "," variable  -> dotpr_
                | "repeat" NUMBER code_block     -> repeat_
                | "print" variable               -> print_
@@ -59,6 +60,8 @@ class VectorGrammarTree(InlineTransformer):
 
     def smult_(self, var, number):
         vector = self.var(var)
+        if not isinstance(number, basestring):
+            number = self.var(number)
         return BladeSMult(vector, int(number))
 
     def dotpr_(self, var1, var2):

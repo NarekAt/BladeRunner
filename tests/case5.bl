@@ -1,0 +1,12 @@
+
+let vecA = {6,10,12}
+let vecB = {3,8,9}
+
+let A = add vecA, vecB
+
+let B = smult A, 6
+
+let vecC = {1,2,3}
+let C = mult B, vecC
+
+print C
